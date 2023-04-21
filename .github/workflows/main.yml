@@ -10,13 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          lfs: true
           token: ${{ secrets.ACCESS_TOKEN }}
       - name: Rebase branch
         run: |
-          git checkout ${{ github.event.ref }}
           git rebase master
       - name: Build code
         uses: gradle/gradle-build-action@v2
