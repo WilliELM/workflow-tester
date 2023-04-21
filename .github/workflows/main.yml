@@ -16,8 +16,8 @@ jobs:
           fetch-depth: 0
       - name: Rebase branch
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
           git rebase origin/master
           
       - name: Build code
