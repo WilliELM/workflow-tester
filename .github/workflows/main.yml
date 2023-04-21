@@ -12,11 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          lfs: true
           token: ${{ secrets.MY_TOKEN || github.token }}
       - name: Rebase branch
         run: |
-          git checkout ${{ github.event.ref }}
           git rebase master
       - name: Build code
         uses: gradle/gradle-build-action@v2
