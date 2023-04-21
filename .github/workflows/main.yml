@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.MY_TOKEN || github.token }}
       - name: Rebase branch
         run: |
-          git rebase master
+          git rebase origin/master
       - name: Build code
         uses: gradle/gradle-build-action@v2
         with:
