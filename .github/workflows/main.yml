@@ -16,7 +16,10 @@ jobs:
           fetch-depth: 0
       - name: Rebase branch
         run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           git rebase origin/master
+          
       - name: Build code
         uses: gradle/gradle-build-action@v2
         with:
