@@ -12,7 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.ref }}
+          lfs: true
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Rebase branch
         run: |
           git checkout ${{ github.event.ref }}
@@ -23,7 +24,7 @@ jobs:
           args: build
       - name: Push branch
         run: |
-          git push -f origin ${{ github.event.ref }}
+          git push origin master
       - name: Push changes to default branch
         uses: ad-m/github-push-action@master
         with:
