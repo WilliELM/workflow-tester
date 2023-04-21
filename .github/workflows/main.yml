@@ -1,0 +1,32 @@
+name: Build and push to default branch
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+      - name: Rebase branch
+        run: |
+          git checkout ${{ github.event.ref }}
+          git rebase master
+      - name: Build code
+        uses: gradle/gradle-build-action@v2
+        with:
+          args: build
+      - name: Push branch
+        run: |
+          git push -f origin ${{ github.event.ref }}
+      - name: Push changes to default branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
